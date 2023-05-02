@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: white;
+}
+#question {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: black;
+  background-color: #FFB6C1;
+  border: 5px solid white;
+  padding: 20px;
+  border-radius: 25px;
+}
+button {
+    margin: 10px;
+}
+#yes {
+    float: left;
+}
+#no {
+    float: right;
+}
+#answer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+#answer p {
+    font-size: 24px;
+    font-weight: bold;
+}
+.rain {
+    position: absolute;
+    bottom: 100%;
+    width: 20px;
+    height: 20px;
+    animation-name: rain-fall;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+}
+@keyframes rain-fall {
+    to {transform: translateY(100vh);}
+}
+</style>
+</head>
+<body>
+
+<div id="question">
+    <p>¿Olvidamos los Días que no te hablé?</p>
+    <button id="yes">Sí</button>
+    <button id="no">No</button>
+</div>
+
+<div id="answer"></div>
+
+<script>
+const question = document.getElementById('question');
+const yes = document.getElementById('yes');
+const no = document.getElementById('no');
+const answer = document.getElementById('answer');
+const loveSymbols = ['??', '??', '??', '??', '??', '??'];
+
+yes.addEventListener('click', () => {
+    question.style.display = 'none';
+    answer.innerHTML = '<p>Ya lo sabía bitch</p>';
+    setInterval(makeItRain, 100);
+});
+
+no.addEventListener('mouseover', moveQuestion);
+no.addEventListener('click', moveQuestion);
+
+function moveQuestion() {
+    const x = Math.random() * (window.innerWidth - question.offsetWidth - 100) + 50;
+    const y = Math.random() * (window.innerHeight - question.offsetHeight - 100) + 50;
+    question.style.top = y + 'px';
+    question.style.left = x + 'px';
+}
+
+function makeItRain() {
+    const raindrop = document.createElement('div');
+    raindrop.classList.add('rain');
+    raindrop.innerHTML = loveSymbols[Math.floor(Math.random() * loveSymbols.length)];
+    raindrop.style.left = Math.random() * window.innerWidth + 'px';
+    document.body.appendChild(raindrop);
+}
+</script>
+
+</body>
+</html>
